@@ -23,7 +23,7 @@ grad_s = pd.read_excel(excel_file,
 
 ### --- load excel table --- By Ali && Omar
 excel_file = 'bengaluru_house_prices.xlsx'
-sheet_name1 = 'bengaluru_house_prices'
+sheet_name4 = 'bengaluru_house_prices'
 
 
 
@@ -33,7 +33,7 @@ df = pd.read_csv(df_filename)
 
 ### --- define table sheets --- By Ali && Omar
 all_h = pd.read_excel(excel_file,
-                                sheet_name_bhp=sheet_name1)
+                                sheet_name_bhp=sheet_name4)
                                
 
 # Create a Streamlit web app
@@ -147,8 +147,7 @@ def section3():
     st.subheader(f":orange[The number of expected graduation students according to the above criteria is = ] {result} students")
     st.subheader(':red[___________________________________________________]')
 
-def section4():
-  def predict_price(location, sqft, bhk, bath):
+def predict_price(location, sqft, bhk, bath):
     loc_index = df.columns.get_loc(location)
     x = [sqft, bath, bhk] + [0] * (len(df.columns) - 3)
     if loc_index >= 0:
@@ -224,7 +223,7 @@ def main():
     elif selected_section == ":red[Predicting graduates]":
         section3()
     elif selected_section == ":gray[Predicting houses]":
-        section4()
+        predict_price()
 
 if __name__ == "__main__":
     main()
