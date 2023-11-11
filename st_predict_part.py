@@ -32,9 +32,6 @@ all_s = pd.read_excel(excel_file,
 
 
                                
-# Load the dataset used for training
-df_filename = 'bhp.csv'
-df = pd.read_csv(df_filename)
 
 
 # Create a Streamlit web app
