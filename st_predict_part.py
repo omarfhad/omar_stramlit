@@ -32,8 +32,8 @@ df_filename = 'bhp.csv'
 df = pd.read_csv(df_filename)
 
 ### --- define table sheets --- By Ali && Omar
-all_s = pd.read_excel(excel_file,
-                                sheet_name=sheet_name1)
+all_h = pd.read_excel(excel_file,
+                                sheet_name_bhp=sheet_name1)
                                
 
 # Create a Streamlit web app
