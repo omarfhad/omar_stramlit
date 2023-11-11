@@ -7,7 +7,19 @@ import pickle
 
 
 # Set the default figure size
+### --- load excel table --- By Majed
+excel_file = 'student.xlsx'
+sheet_name1 = 'data'
+sheet_name2 = 'new'
+sheet_name3 = 'grad'
 
+### --- define table sheets --- By Majed
+all_s = pd.read_excel(excel_file,
+                                sheet_name=sheet_name1)
+new_s = pd.read_excel(excel_file,
+                                sheet_name=sheet_name2)
+grad_s = pd.read_excel(excel_file,
+                                sheet_name=sheet_name3)
 
 ### --- load excel table --- By Ali && Omar
 excel_file = 'bengaluru_house_prices.xlsx'
