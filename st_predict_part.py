@@ -37,21 +37,6 @@ all_s = pd.read_excel(excel_file,
 # Create a Streamlit web app
 st.title('Bangalore House Price Prediction')
 
-# Sidebar with input fields
-st.sidebar.header('Enter Property Details')
-
-# Location
-locations = df.columns[3:]
-location = st.sidebar.selectbox('Location', locations)
-
-# Total Square Feet
-sqft = st.sidebar.slider('Total Square Feet', min_value=100, max_value=10000, value=1000, step=100)
-
-# Number of Bedrooms (BHK)
-bhk = st.sidebar.number_input('Number of Bedrooms (BHK)', min_value=1, max_value=10, value=2)
-
-# Number of Bathrooms
-bath = st.sidebar.number_input('Number of Bathrooms', min_value=1, max_value=10, value=2)
 
 
 def section1():
