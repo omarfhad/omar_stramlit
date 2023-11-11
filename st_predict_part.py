@@ -3,12 +3,9 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
-import numpy as np
 import pickle
-from matplotlib import pyplot as plt
 
 
-import matplotlib.pyplot as plt
 # Set the default figure size
 plt.rcParams["figure.figsize"] = (20, 10)
 
