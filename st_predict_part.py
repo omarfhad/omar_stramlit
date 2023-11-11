@@ -12,6 +12,9 @@ excel_file = 'student.xlsx'
 sheet_name1 = 'data'
 sheet_name2 = 'new'
 sheet_name3 = 'grad'
+sheet_name4 = 'bengaluru_house_prices'
+sheet_name5 =  'bhp'
+
 
 ### --- define table sheets --- By Majed
 all_s = pd.read_excel(excel_file,
@@ -21,20 +24,21 @@ new_s = pd.read_excel(excel_file,
 grad_s = pd.read_excel(excel_file,
                                 sheet_name=sheet_name3)
 
-### --- load excel table --- By Ali && Omar
-excel_file = 'bengaluru_house_prices.xlsx'
-sheet_name4 = 'bengaluru_house_prices'
+### --- define table sheets --- By Ali && Omar
+all_s = pd.read_excel(excel_file,
+                                sheet_name=sheet_name4)
+all_s = pd.read_excel(excel_file,
+                                sheet_name=sheet_name5)
 
-
-
+# Load the trained model
+model_filename = 'banglore_home_prices_model.pickle'
+with open(model_filename, 'rb') as file:
+    model = pickle.load(file)
+                               
 # Load the dataset used for training
 df_filename = 'bhp.csv'
 df = pd.read_csv(df_filename)
 
-### --- define table sheets --- By Ali && Omar
-all_h = pd.read_excel(excel_file,
-                                sheet_name=sheet_name4)
-                               
 
 # Create a Streamlit web app
 st.title('Bangalore House Price Prediction')
@@ -57,58 +61,65 @@ bath = st.sidebar.number_input('Number of Bathrooms', min_value=1, max_value=10,
 
 
 def section1():
-    ### --- show the tables to the user --- By Ali & OMar
+    ### --- show the tables to the user --- By Majed
     st.subheader(':blue[___________________________________________________]')
-    st.info('**:blue[Table 1-1: Bengaluru_house_prices ]**')
-    st.dataframe(all_s)
+    st.info('**:blue[Table 1-1: Enrolled students in higher education for the past 15 years]**')
+    st.dataframe(new_s)
     st.subheader(':blue[___________________________________________________]')
-
+    st.info('**:blue[Table 1-2: Graduated students in higher education for the past 15 years]**')
+    st.dataframe(grad_s)
+    st.subheader(':blue[___________________________________________________]')
 
 def section2():
-    ### --- start the choices for the charts ---  By Ali and Omar
-    ### --- line-chart --- By Ali and Omar
+    ### --- start the choices for the charts --- By Majed
+    ### --- line-chart --- By Majed
     st.subheader(':green[___________________________________________________]')
-    
     st.success('**:green[L I N E - C H A R T: choose from the criteria below for the chart]**')
-    
-    selected_price = st.selectbox('Select the price of the houses:', all_s['price'].unique())
-    selected_size = st.selectbox('Select the size of the house:', all_s['size'].unique())
-    selected_location = st.selectbox('Select the location of the house:', all_s['location'].unique())
+    selected_state = st.selectbox('Select the state of the student:', all_s['state'].unique())
+    selected_degree = st.selectbox('Select the degree of the student:', all_s['degree'].unique())
+    selected_sex = st.selectbox('Select the sex of the student:', all_s['sex'].unique())
     filtered_data = all_s[
-        (all_s['price'] == selected_price) &
-        (all_s['size'] == selected_size) &
-        (all_s['location'] == selected_location)
+        (all_s['state'] == selected_state) &
+        (all_s['degree'] == selected_degree) &
+        (all_s['sex'] == selected_sex)
     ]
     line_chart = px.line(filtered_data,
-                   x='location',
-                   y='price',
-                   text='price',
+                   x='years',
+                   y='numbers',
+                   text='numbers',
                    color_discrete_sequence = ['#F63366']*len(all_s),
                    template= 'plotly_white')
     st.plotly_chart(line_chart)
 
-
-
     st.subheader(':green[___________________________________________________]')
-    ### --- treemap-chart --- By Omar & Ali    
+    ### --- treemap-chart --- By Majed    
     st.success('**:green[T R E E M A P - C H A R T: choose from the criteria below for the chart]**')
-    
-    
-    selected_availability = st.selectbox('Select the availability please:', all_s['availability'].unique())
-    selected_area_type = st.selectbox('Select the year please:', all_s['area_type'].unique())
-    
+    selected_state2 = st.selectbox('Select the state please:', all_s['state'].unique())
+    selected_years2 = st.selectbox('Select the year please:', all_s['years'].unique())
     filtered_data2 = all_s[
-        (all_s['availability'] == area_type) &
-        ( all_s['area_type'] == selected_availability)
+        (all_s['state'] == selected_state2) &
+        ( all_s['years'] == selected_years2)
     ]
     treemap_chart = px.treemap(filtered_data2,
-                   path=[ 'availability', 'area_type', 'price'], 
-                   values='price')
-                  
+                   path=[ 'degree', 'sex', 'numbers'], 
+                   values='numbers')
+                   #text='numbers',
+                   #color_discrete_sequence = ['#F63366']*len(all_s)
+                   #template= 'plotly_white')
     st.plotly_chart(treemap_chart)
     st.subheader(':green[___________________________________________________]')
     
-
+    ### --- pie-chart --- By Majed    
+    st.success('**:green[P I E - C H A R T: choose from the criteria below for the chart]**')
+    selected_years = st.selectbox('Select the year:', all_s['years'].unique())
+    selected_degree3 = st.selectbox('Select the degree:', all_s['degree'].unique())
+    filtered_data3 = all_s[ (all_s['degree'] == selected_degree3) & (all_s['years'] == selected_years)]
+    pie_chart = px.pie(filtered_data3,
+                title='The ratio of degree during the above year',
+                values='numbers',
+                names='state')
+    st.plotly_chart(pie_chart)
+    st.subheader(':green[___________________________________________________]')
 
 def section3():
     ### --- start the prediction part --- By Majed
