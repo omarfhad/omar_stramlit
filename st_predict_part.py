@@ -7,7 +7,7 @@ import pickle
 
 
 # Set the default figure size
-plt.rcParams["figure.figsize"] = (20, 10)
+
 
 ### --- load excel table --- By Ali && Omar
 excel_file = 'bengaluru_house_prices.xlsx'
