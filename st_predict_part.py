@@ -24,9 +24,9 @@ grad_s = pd.read_excel(excel_file,
                                 sheet_name=sheet_name3)
 
 # Load the trained model
-model_filename = 'banglore_home_prices_model.pickle'
-with open(model_filename, 'rb') as file:
-    model = pickle.load(file)
+# model_filename = 'banglore_home_prices_model.pickle'
+# with open(model_filename, 'rb') as file:
+ ##############   model = pickle.load(file)
 
 # Load the dataset used for training
 df_filename = 'bhp.csv'
