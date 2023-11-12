@@ -34,7 +34,7 @@ df = pd.read_csv(df_filename)
 
 
 # Create a Streamlit web app
-st.title('Bangalore House Price Prediction')
+## st.title('Bangalore House Price Prediction')
 
 # Sidebar with input fields
 st.sidebar.header('Enter Property Details')
