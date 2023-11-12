@@ -3,8 +3,7 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
-import os
-import pickle
+
 
 
 
@@ -23,21 +22,7 @@ new_s = pd.read_excel(excel_file,
 grad_s = pd.read_excel(excel_file,
                                 sheet_name=sheet_name3)
 
-# Load the trained model
-# model_filename = 'banglore_home_prices_model.pickle'
-# with open(model_filename, 'rb') as file:
- ##############   model = pickle.load(file)
 
-# Load the dataset used for training
-df_filename = 'bhp.csv'
-df = pd.read_csv(df_filename)
-
-
-# Create a Streamlit web app
-## st.title('Bangalore House Price Prediction')
-
-# Sidebar with input fields
-## st.sidebar.header('Enter Property Details')
 
 
 def section1():
@@ -139,23 +124,6 @@ def section3():
     st.subheader(':red[___________________________________________________]')
 
 
-def section4()
-
-# Sidebar with input fields
-st.sidebar.header('Enter Property Details')
-
-# Location
-locations = df.columns[3:]
-location = st.sidebar.selectbox('Location', locations)
-
-# Total Square Feet
-sqft = st.sidebar.slider('Total Square Feet', min_value=100, max_value=10000, value=1000, step=100)
-
-# Number of Bedrooms (BHK)
-bhk = st.sidebar.number_input('Number of Bedrooms (BHK)', min_value=1, max_value=10, value=2)
-
-# Number of Bathrooms
-bath = st.sidebar.number_input('Number of Bathrooms', min_value=1, max_value=10, value=2)
 
 def main():
     ### --- Page introduction --- By Majed
