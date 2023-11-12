@@ -26,16 +26,6 @@ grad_s = pd.read_excel(excel_file,
 
 
 
-model_filename = 'banglore_home_prices_model.pickle'
-
-if os.path.exists(model_filename):
-    with open(model_filename, 'rb') as file:
-        model = pickle.load(file)
-else:
-    print(f"The file {model_filename} does not exist.")
-
-
-
 def section1():
     ### --- show the tables to the user --- By Majed
     st.subheader(':blue[___________________________________________________]')
