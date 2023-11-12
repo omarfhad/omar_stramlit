@@ -5,6 +5,9 @@ import streamlit as st
 import plotly.express as px
 import pickle
 
+
+
+
 ### --- load excel table --- By Majed
 excel_file = 'student.xlsx'
 sheet_name1 = 'data'
@@ -18,6 +21,13 @@ new_s = pd.read_excel(excel_file,
                                 sheet_name=sheet_name2)
 grad_s = pd.read_excel(excel_file,
                                 sheet_name=sheet_name3)
+
+
+# Load the trained model
+model_filename = 'banglore_home_prices_model.pickle_1'
+with open(model_filename, 'rb') as file:
+    model = pickle.load(file)
+
 
 
 def section1():
