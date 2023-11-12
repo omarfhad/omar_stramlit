@@ -1,20 +1,12 @@
-### --- This work for 704 - streamlit project --- By Majed
-
 import pandas as pd
 import streamlit as st
 import plotly.express as px
-import pickle
 
-
-# Set the default figure size
 ### --- load excel table --- By Majed
 excel_file = 'student.xlsx'
 sheet_name1 = 'data'
 sheet_name2 = 'new'
 sheet_name3 = 'grad'
-sheet_name4 = 'bengaluru_house_prices'
-sheet_name5 =  'bhp'
-
 
 ### --- define table sheets --- By Majed
 all_s = pd.read_excel(excel_file,
@@ -23,20 +15,6 @@ new_s = pd.read_excel(excel_file,
                                 sheet_name=sheet_name2)
 grad_s = pd.read_excel(excel_file,
                                 sheet_name=sheet_name3)
-
-### --- define table sheets --- By Ali && Omar
-all_s = pd.read_excel(excel_file,
-                                sheet_name=sheet_name4)
-all_s = pd.read_excel(excel_file,
-                                sheet_name=sheet_name5)
-
-
-                               
-
-
-# Create a Streamlit web app
-st.title('Bangalore House Price Prediction')
-
 
 
 def section1():
@@ -136,48 +114,7 @@ def section3():
         result = 0
     st.subheader(f":orange[The number of expected graduation students according to the above criteria is = ] {result} students")
     st.subheader(':red[___________________________________________________]')
-
-def predict_price(location, sqft, bhk, bath):
-    loc_index = df.columns.get_loc(location)
-    x = [sqft, bath, bhk] + [0] * (len(df.columns) - 3)
-    if loc_index >= 0:
-        x[loc_index] = 1
-    price = model.predict([x])[0]
-    return price
-
-if st.sidebar.button('Predict Price'):
-    predicted_price = predict_price(location, sqft, bhk, bath)
-    st.sidebar.subheader(f'Predicted Price: ₹{predicted_price:.2f} Lakhs')
-
-# Data Exploration
-st.subheader('Data Exploration')
-st.write(df.head(10))
-
-# Display scatter plot
-st.subheader('Scatter Plot for Price vs. Square Feet')
-st.scatter_chart(df[['total_sqft', 'price']])
-
-# Display histogram for price per square feet
-st.subheader('Histogram for Price Per Square Feet')
-st.bar_chart(df['price_per_sqft'])
-
-# Display histogram for number of bedrooms
-st.subheader('Histogram for Number of Bedrooms')
-st.bar_chart(df['bhk'])
-
-# Display histogram for number of bathrooms
-st.subheader('Histogram for Number of Bathrooms')
-st.bar_chart(df['bath'])
-
-# Display a link to the dataset
-st.subheader('Download the Dataset')
-st.markdown('[Download the dataset](https://www.kaggle.com/amitabhajoy/bengaluru-house-price-data)')
-
-# Display information about the project
-st.subheader('About')
-st.write('This web app provides a simple interface for predicting house prices in Bangalore based on location, square feet area, number of bedrooms, and number of bathrooms.')
-
-  
+    
 def main():
     ### --- Page introduction --- By Majed
     st.set_page_config(page_title='Students Prediction')
@@ -191,16 +128,11 @@ def main():
                     "", 
                     [":blue[Student data over 15 years]", 
                     ":green[Charts for Students]", 
-                    ":red[Predicting graduates]",
-                    ":gray[Predicting houses]"],
+                    ":red[Predicting graduates]"],
                     captions = [":blue[ـــــــــــــــــــــــــــــــــــــــــــــــــــ]", 
                     ":green[ـــــــــــــــــــــــــــــــــــــــــــــــــــ]", 
-                    ":red[ـــــــــــــــــــــــــــــــــــــــــــــــــــ]",
-                    ":gray[ـــــــــــــــــــــــــــــــــــــــــــــــــــ]"])
+                    ":red[ـــــــــــــــــــــــــــــــــــــــــــــــــــ]"])
     st.sidebar.markdown('________________________________')
-    
-    
-    st.sidebar.subheader('Resources')
     st.sidebar.markdown('Students Data Resource from SAMA: https://sama.gov.sa/en-us/economicreports/pages/report.aspx?cid=127#')
     st.sidebar.markdown('Download all files from GitHub: https://github.com/majidphd/student/tree/main')
     st.sidebar.markdown('Deploy your app from Streamlit: https://share.streamlit.io/')
@@ -212,8 +144,6 @@ def main():
         section2()
     elif selected_section == ":red[Predicting graduates]":
         section3()
-    elif selected_section == ":gray[Predicting houses]":
-        predict_price()
 
 if __name__ == "__main__":
     main()
