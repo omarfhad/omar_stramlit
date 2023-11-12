@@ -3,6 +3,7 @@
 import pandas as pd
 import streamlit as st
 import plotly.express as px
+import os
 import pickle
 
 
@@ -23,10 +24,14 @@ grad_s = pd.read_excel(excel_file,
                                 sheet_name=sheet_name3)
 
 
-# Load the trained model
-model_filename = 'banglore_home_prices_model.pickle_1'
-with open(model_filename, 'rb') as file:
-    model = pickle.load(file)
+
+
+model_filename = 'banglore_home_prices_model.pickle'
+if os.path.exists(model_filename):
+    with open(model_filename, 'rb') as file:
+        model = pickle.load(file)
+else:
+    print(f"The file {model_filename} does not exist.")
 
 
 
