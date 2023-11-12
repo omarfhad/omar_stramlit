@@ -37,7 +37,7 @@ df = pd.read_csv(df_filename)
 ## st.title('Bangalore House Price Prediction')
 
 # Sidebar with input fields
-st.sidebar.header('Enter Property Details')
+## st.sidebar.header('Enter Property Details')
 
 
 def section1():
@@ -137,7 +137,26 @@ def section3():
         result = 0
     st.subheader(f":orange[The number of expected graduation students according to the above criteria is = ] {result} students")
     st.subheader(':red[___________________________________________________]')
-    
+
+
+def section4()
+
+# Sidebar with input fields
+st.sidebar.header('Enter Property Details')
+
+# Location
+locations = df.columns[3:]
+location = st.sidebar.selectbox('Location', locations)
+
+# Total Square Feet
+sqft = st.sidebar.slider('Total Square Feet', min_value=100, max_value=10000, value=1000, step=100)
+
+# Number of Bedrooms (BHK)
+bhk = st.sidebar.number_input('Number of Bedrooms (BHK)', min_value=1, max_value=10, value=2)
+
+# Number of Bathrooms
+bath = st.sidebar.number_input('Number of Bathrooms', min_value=1, max_value=10, value=2)
+
 def main():
     ### --- Page introduction --- By Majed
     st.set_page_config(page_title='Students Prediction')
